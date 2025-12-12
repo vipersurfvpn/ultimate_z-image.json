@@ -1,0 +1,224 @@
+{
+  "input": {
+    "workflow": {
+      "9": {
+        "inputs": {
+          "filename_prefix": "z-image",
+          "images": [
+            "57",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "SaveImage"
+        }
+      },
+      "39": {
+        "inputs": {
+          "filename": "qwen_3_4b.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "40": {
+        "inputs": {
+          "filename": "ae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "41": {
+        "inputs": {
+          "width": 1088,
+          "height": 1920,
+          "batch_size": 1
+        },
+        "class_type": "EmptySD3LatentImage",
+        "_meta": {
+          "title": "EmptySD3LatentImage"
+        }
+      },
+      "42": {
+        "inputs": {
+          "conditioning": [
+            "45",
+            0
+          ]
+        },
+        "class_type": "ConditioningZeroOut",
+        "_meta": {
+          "title": "ConditioningZeroOut"
+        }
+      },
+      "43": {
+        "inputs": {
+          "samples": [
+            "44",
+            0
+          ],
+          "vae": [
+            "40",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "44": {
+        "inputs": {
+          "seed": 41680714873143,
+          "steps": 9,
+          "cfg": 1,
+          "sampler_name": "res_2s",
+          "scheduler": "beta",
+          "denoise": 1,
+          "model": [
+            "47",
+            0
+          ],
+          "positive": [
+            "45",
+            0
+          ],
+          "negative": [
+            "42",
+            0
+          ],
+          "latent_image": [
+            "41",
+            0
+          ]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "KSampler"
+        }
+      },
+      "45": {
+        "inputs": {
+          "text": "",
+          "clip": [
+            "61",
+            1
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIPTextEncode"
+        }
+      },
+      "46": {
+        "inputs": {
+          "filename": "z_image_turbo_bf16.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "47": {
+        "inputs": {
+          "value": 3,
+          "model": [
+            "61",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingAuraFlow",
+        "_meta": {
+          "title": "ModelSamplingAuraFlow"
+        }
+      },
+      "52": {
+        "inputs": {
+          "upscale_model": [
+            "53",
+            0
+          ],
+          "image": [
+            "43",
+            0
+          ]
+        },
+        "class_type": "ImageUpscaleWithModel",
+        "_meta": {
+          "title": "ImageUpscaleWithModel"
+        }
+      },
+      "53": {
+        "inputs": {
+          "model_name": "4x_NMKD-Siax_200k.pth"
+        },
+        "class_type": "UpscaleModelLoader",
+        "_meta": {
+          "title": "UpscaleModelLoader"
+        }
+      },
+      "55": {
+        "inputs": {
+          "value": [
+            {
+              "name": "A",
+              "selected": true,
+              "url": "/api/view?filename=rgthree.compare._temp_fsnsv_00003_.png&type=temp&subfolder=&rand=0.39924833734428344"
+            },
+            {
+              "name": "B",
+              "selected": true,
+              "url": "/api/view?filename=rgthree.compare._temp_fsnsv_00004_.png&type=temp&subfolder=&rand=0.4544419781612322"
+            }
+          ],
+          "image_a": [
+            "43",
+            0
+          ],
+          "image_b": [
+            "57",
+            0
+          ]
+        },
+        "class_type": "Image Comparer (rgthree)",
+        "_meta": {
+          "title": "Image Comparer (rgthree)"
+        }
+      },
+      "57": {
+        "inputs": {
+          "text": "nearest-exact",
+          "image": [
+            "52",
+            0
+          ]
+        },
+        "class_type": "ImageScaleBy",
+        "_meta": {
+          "title": "ImageScaleBy"
+        }
+      },
+      "61": {
+        "inputs": {
+          "filename": "RoxieRavage_Epoch80.safetensors",
+          "model": [
+            "46",
+            0
+          ],
+          "clip": [
+            "39",
+            0
+          ]
+        },
+        "class_type": "Lora Loader Stack (rgthree)",
+        "_meta": {
+          "title": "Lora Loader Stack (rgthree)"
+        }
+      }
+    }
+  }
+}
